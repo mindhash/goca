@@ -11,9 +11,6 @@ import (
 	"github.com/kolo/xmlrpc"
 )
 
-var (
-	client *oneClient
-)
 
 // OneConfig contains the information to communicate with OpenNebula
 type OneConfig struct {
@@ -25,7 +22,7 @@ type OneConfig struct {
 	XmlrpcURL string
 }
 
-type oneClient struct {
+type OneClient struct {
 	token             string
 	xmlrpcClient      *xmlrpc.Client
 	xmlrpcClientError error
@@ -52,6 +49,20 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+
+func NewClient(user string, password string, xmlrpcURL string) *OneClient {
+	config := NewConfig(user string, password string, xmlrpcURL string)
+
+	xmlrpcClient, xmlrpcClientError := xmlrpc.NewClient(conf.XmlrpcURL, nil)
+
+	return &OneClient{
+		token:             conf.Token,
+		xmlrpcClient:      xmlrpcClient,
+		xmlrpcClientError: xmlrpcClientError,
+	}
+
 }
 
 // NewConfig returns a new OneConfig object with the specified user, password,
@@ -93,12 +104,13 @@ func NewConfig(user string, password string, xmlrpcURL string) OneConfig {
 	return config
 }
 
+
 // SetClient assigns a value to the client variable
 func SetClient(conf OneConfig) error {
 
 	xmlrpcClient, xmlrpcClientError := xmlrpc.NewClient(conf.XmlrpcURL, nil)
 
-	client = &oneClient{
+	client = &OneClient{
 		token:             conf.Token,
 		xmlrpcClient:      xmlrpcClient,
 		xmlrpcClientError: xmlrpcClientError,
@@ -108,8 +120,8 @@ func SetClient(conf OneConfig) error {
 }
 
 // SystemVersion returns the current OpenNebula Version
-func SystemVersion() (string, error) {
-	response, err := client.Call("one.system.version")
+func (c *OneClient) SystemVersion() (string, error) {
+	response, err := c.Call("one.system.version")
 	if err != nil {
 		return "", err
 	}
@@ -118,7 +130,7 @@ func SystemVersion() (string, error) {
 }
 
 // Call is an XML-RPC wrapper. It returns a pointer to response and an error.
-func (c *oneClient) Call(method string, args ...interface{}) (*response, error) {
+func (c *OneClient) Call(method string, args ...interface{}) (*response, error) {
 	var (
 		ok bool
 
