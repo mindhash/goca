@@ -53,7 +53,7 @@ func init() {
 
 
 func NewClient(user string, password string, xmlrpcURL string) *OneClient {
-	config := NewConfig(user string, password string, xmlrpcURL string)
+	config := NewConfig(user, password, xmlrpcURL)
 
 	xmlrpcClient, xmlrpcClientError := xmlrpc.NewClient(conf.XmlrpcURL, nil)
 
