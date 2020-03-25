@@ -1,0 +1,6 @@
+github.com/kolo/xmlrpc v0.0.0-20150413191830-0826b98aaa29 h1:A9Cxbd2chMbJwYR6WpWelyovi0v8Pv4xTUc64pO1gxE=
+github.com/kolo/xmlrpc v0.0.0-20150413191830-0826b98aaa29/go.mod h1:o03bZfuBwAXHetKXuInt4S7omeXUu62/A845kiycsSQ=
+golang.org/x/net v0.0.0-20171128024222-fc492d2e1069 h1:styrB++FWIaQRoY3EsMQ6ep8YBTVO7Cz2FhJWTAhzZI=
+golang.org/x/net v0.0.0-20171128024222-fc492d2e1069/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+gopkg.in/xmlpath.v2 v2.0.0-20150820204837-860cbeca3ebc h1:LMEBgNcZUqXaP7evD1PZcL6EcDVa2QOFuI+cqM3+AJM=
+gopkg.in/xmlpath.v2 v2.0.0-20150820204837-860cbeca3ebc/go.mod h1:N8UOSI6/c2yOpa/XDz3KVUiegocTziPiqNkeNTMiG1k=
